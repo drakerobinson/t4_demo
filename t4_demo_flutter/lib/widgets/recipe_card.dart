@@ -11,20 +11,20 @@ import '../constants/colors.dart';
 class RecipeCard extends StatefulWidget {
 
   final Recipe recipe;
+  final bool isSaved;
 
-  RecipeCard(this.recipe);
+  RecipeCard(this.recipe, this.isSaved);
 
   @override
-  RecipeCardState createState() => RecipeCardState(recipe);
+  RecipeCardState createState() => RecipeCardState(recipe, isSaved);
 }
 
 class RecipeCardState extends State<RecipeCard> {
 
   final Recipe recipe;
+  bool isSaved;
 
-  bool isSaved = false;
-
-  RecipeCardState(this.recipe);
+  RecipeCardState(this.recipe, this.isSaved);
 
   @override
   Widget build(BuildContext context) {

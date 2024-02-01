@@ -1,8 +1,10 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:t4_demo_flutter/widgets/grocery_browser.dart';
-import 'package:t4_demo_flutter/widgets/persisted_grocery_list.dart';
+import 'package:t4_demo_flutter/widgets/landing/multi_tab.dart';
+import 'package:t4_demo_flutter/widgets/landing/persisted_grocery_list.dart';
 import 'package:t4_demo_flutter/widgets/recipes_browser.dart';
 
 import 'constants/colors.dart';
@@ -15,7 +17,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -56,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> pages = [
-    PersistedGroceryList(),
+    MultiTab(),
     GroceryBrowser(),
     RecipesBrowser(),
   ];

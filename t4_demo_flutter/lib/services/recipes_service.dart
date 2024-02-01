@@ -37,7 +37,7 @@ class RecipesService {
       await FirebaseFirestore.instance.collection('savedRecipes').doc(
           await DeviceService().getDeviceId()).set(
           {"recipes": FieldValue.arrayUnion([{
-            "imageUrl": recipe.imageUrl,
+            "image": recipe.imageUrl,
             "sourceUrl": recipe.sourceUrl,
             "title": recipe.recipeName,
             "extendedIngredients": getSerializedIngredients(recipe),
@@ -56,11 +56,30 @@ class RecipesService {
       serializedIngredients.add({
         "id": element.id,
         "nameClean": element.nameClean,
-        "quantity": element.quantity,
-        "metric": element.metric,
+        "amount": element.quantity,
+        "unit": element.metric,
       });
     });
     return serializedIngredients;
+  }
+
+  Future<List<Recipe>> getSavedRecipes() async {
+    String deviceId = await DeviceService().getDeviceId();
+    List<Recipe> recipes = [];
+    await FirebaseFirestore
+        .instance
+        .collection('savedRecipes')
+        .doc(deviceId)
+        .get()
+        .then((DocumentSnapshot doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          data['recipes'].forEach((element) {
+            recipes.add(Recipe.fromJSON(element));
+          });
+      },
+      onError: (error) => print(error.toString()),
+    );
+    return recipes;
   }
 
 }

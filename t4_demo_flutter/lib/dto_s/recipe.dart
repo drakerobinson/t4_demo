@@ -24,7 +24,7 @@ class Recipe {
   }
 
   Map<String, dynamic> toJson()=> {
-    'imageUrl': imageUrl,
+    'image': imageUrl,
     'sourceUrl': sourceUrl,
     'recipeName': recipeName,
     'ingredients': ingredients,

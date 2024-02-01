@@ -23,8 +23,8 @@ class Ingredients {
   Map<String, dynamic> toJson() => {
     "id": id,
     "nameClean": nameClean,
-    "quantity": quantity,
-    "metric": metric,
+    "amount": quantity,
+    "unit": metric,
   };
 
 }

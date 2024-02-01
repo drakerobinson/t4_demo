@@ -16,15 +16,14 @@ class RecipesBrowserState extends ConsumerState<RecipesBrowser> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      child: FutureBuilder(
+    return FutureBuilder(
         future: RecipesService().getRandomRecipes(),
         builder: (context, AsyncSnapshot<List<Recipe>> snapshot) {
           if(snapshot.hasData) {
             return ListView.builder(
               itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return RecipeCard(snapshot.data![index]);
+                  return RecipeCard(snapshot.data![index], false);
                 }
             );
           }
@@ -38,7 +37,6 @@ class RecipesBrowserState extends ConsumerState<RecipesBrowser> {
           }
           return const CircularProgressIndicator();
         },
-      ),
     );
   }
 }
