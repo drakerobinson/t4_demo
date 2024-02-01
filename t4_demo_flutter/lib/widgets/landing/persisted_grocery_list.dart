@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:t4_demo_flutter/services/ingredients_service.dart';
+import 'package:t4_demo_flutter/widgets/components/ingredient_card.dart';
 import 'package:t4_demo_flutter/widgets/grocery_item.dart';
 
 import '../../constants/strings.dart';
 import '../../constants/text_styles.dart';
+import '../../dto_s/ingredients.dart';
 import '../../providers/saved_data_provider.dart';
 
 class PersistedGroceryList extends ConsumerStatefulWidget{
@@ -19,6 +22,7 @@ class PersistedGroceryListState extends ConsumerState<PersistedGroceryList> {
     return  Column(
       children: [
         getSubheading(),
+        getPersistedGroceries()
       ]
     );
   }
@@ -35,16 +39,26 @@ class PersistedGroceryListState extends ConsumerState<PersistedGroceryList> {
   }
 
   getPersistedGroceries() {
-    final savedGroceries = ref.watch(savedGroceriesProvider);
-    return switch(savedGroceries) {
-      AsyncData(:final value) => ListView.builder(
-          itemBuilder: (context, index) {
-            return GroceryItem();
+    return Flexible(child: FutureBuilder(
+        future: IngredientsService().getSavedIngredients(),
+        builder: (context, AsyncSnapshot<List<Ingredient>> snapshot) {
+          if(snapshot.hasError) {
+            return const Text("There was an issue retrieving your data");
           }
-      ),
-    AsyncError(:final error) => Text(error.toString()),
-    _ => const CircularProgressIndicator(),
-    };
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          if (snapshot.hasData) {
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  return IngredientCard(snapshot.data![index]);
+                }
+            );
+          }
+          return const CircularProgressIndicator();
+        }
+    ));
 
   }
 

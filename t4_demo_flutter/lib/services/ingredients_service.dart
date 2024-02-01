@@ -47,5 +47,24 @@ class IngredientsService {
       return <Ingredient>[];
     }
   }
+
+  Future<List<Ingredient>> getSavedIngredients() async {
+    String deviceId = await DeviceService().getDeviceId();
+    List<Ingredient> ingredients = [];
+    await FirebaseFirestore
+        .instance
+        .collection('savedIngredients')
+        .doc(deviceId)
+        .get()
+        .then((DocumentSnapshot doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      data['ingredients'].forEach((element) {
+        ingredients.add(Ingredient.fromQuery(element));
+      });
+    },
+      onError: (error) => print(error.toString()),
+    );
+    return ingredients;
+  }
   
 }
