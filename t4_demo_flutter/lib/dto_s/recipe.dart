@@ -5,7 +5,7 @@ class Recipe {
   final String imageUrl;
   final String sourceUrl;
   final String recipeName;
-  final List<Ingredients> ingredients;
+  final List<Ingredient> ingredients;
 
   Recipe({
     required this.imageUrl,
@@ -33,9 +33,9 @@ class Recipe {
 }
 
 parseIngredientsList(Map<String, dynamic> json) {
-  List<Ingredients> ingredientsList = [];
+  List<Ingredient> ingredientsList = [];
   json['extendedIngredients'].forEach((element) {
-    ingredientsList.add(Ingredients.fromJSON(element));
+    ingredientsList.add(Ingredient.fromExpandedJSON(element));
   });
   return ingredientsList;
 }

@@ -6,7 +6,7 @@ import 'package:t4_demo_flutter/dto_s/recipe.dart';
 import 'package:t4_demo_flutter/services/recipes_service.dart';
 import 'package:t4_demo_flutter/widgets/webview.dart';
 
-import '../constants/colors.dart';
+import '../../constants/colors.dart';
 
 class RecipeCard extends StatefulWidget {
 
@@ -100,7 +100,7 @@ class RecipeCardState extends State<RecipeCard> {
     ));
   }
 
-  getIngredientLabel(Ingredients ingredient) {
+  getIngredientLabel(Ingredient ingredient) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 2.5),
       decoration: BoxDecoration(
@@ -115,7 +115,7 @@ class RecipeCardState extends State<RecipeCard> {
               child: Column(
                 children: [
                   Text(
-                    ingredient.nameClean,
+                    ingredient.name,
                     maxLines: 3,
                   ),
                   Row(

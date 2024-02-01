@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:t4_demo_flutter/services/recipes_service.dart';
-import 'package:t4_demo_flutter/widgets/recipe_card.dart';
+import 'package:t4_demo_flutter/widgets/components/recipe_card.dart';
 
 import '../dto_s/recipe.dart';
 

@@ -5,13 +5,15 @@ import 'package:http/http.dart' as http;
 import 'package:t4_demo_flutter/dto_s/recipe.dart';
 import 'package:t4_demo_flutter/services/device_service.dart';
 
+import '../constants/strings.dart';
+
 
 class RecipesService {
 
 
   Future<List<Recipe>> getRandomRecipes() async {
     var response = await http.get(
-      Uri.parse('https://api.spoonacular.com/recipes/random?apiKey=15abfbe7f6744be1af885113ef4411ae'),
+      Uri.parse('https://api.spoonacular.com/recipes/random?${Strings.apiKey}'),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -55,7 +57,7 @@ class RecipesService {
     recipe.ingredients.forEach((element) {
       serializedIngredients.add({
         "id": element.id,
-        "nameClean": element.nameClean,
+        "nameClean": element.name,
         "amount": element.quantity,
         "unit": element.metric,
       });
@@ -81,5 +83,9 @@ class RecipesService {
     );
     return recipes;
   }
+
+  //Future<List<Recipe>> queryRecipes(String query) async {
+
+  //}
 
 }

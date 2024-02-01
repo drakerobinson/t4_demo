@@ -5,7 +5,7 @@ import 'package:t4_demo_flutter/widgets/grocery_item.dart';
 
 import '../../constants/strings.dart';
 import '../../constants/text_styles.dart';
-import '../../saved_data_provider.dart';
+import '../../providers/saved_data_provider.dart';
 
 class PersistedGroceryList extends ConsumerStatefulWidget{
   @override
