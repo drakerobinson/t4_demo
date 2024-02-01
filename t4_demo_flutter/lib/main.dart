@@ -67,9 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _currentPage = 0;
     _pageController.addListener(() {
-      setState(() {
-        _currentPage = _pageController.page!.toInt();
-      });
     });
   }
 
@@ -106,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
               dotsCount: 3,
             position: _currentPage,
             mainAxisAlignment: MainAxisAlignment.center,
-          decorator: DotsDecorator(
+          decorator: const DotsDecorator(
             activeColor: AppColors.darkPrimary,
             color: Colors.white
           ),
