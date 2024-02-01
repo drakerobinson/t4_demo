@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "838836911296",
+    "project_id": "t4-demo-b55bf",
+    "storage_bucket": "t4-demo-b55bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838836911296:android:74d774ccf393a27f12c125",
+        "android_client_info": {
+          "package_name": "com.t4.demo.t4_demo_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAgz8GIKMVBTljhqlCFJbU9P-orhy1Exg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
