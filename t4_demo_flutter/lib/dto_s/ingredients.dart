@@ -1,7 +1,7 @@
 class Ingredient {
 
   final int id;
-  final String name;
+  final String? name;
   final double quantity;
   final String metric;
 

@@ -4,12 +4,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:t4_demo_flutter/providers/search_providers.dart';
 
 class CustomSearchBar extends ConsumerStatefulWidget {
+
+  final String hintText;
+
+  CustomSearchBar(this.hintText);
+
   @override
-  CustomSearchBarState createState()=> CustomSearchBarState();
+  CustomSearchBarState createState()=> CustomSearchBarState(hintText);
 }
 
 class CustomSearchBarState extends ConsumerState<CustomSearchBar> {
   String query = '';
+
+  final String hintText;
+
+  CustomSearchBarState(this.hintText);
 
   void onQueryChanged(String newQuery) {
     setState(() {
@@ -26,7 +35,7 @@ class CustomSearchBarState extends ConsumerState<CustomSearchBar> {
       child: TextField(
         onChanged: onQueryChanged,
         decoration: InputDecoration(
-          labelText: "Search For Groceries",
+          labelText: hintText,
           border: OutlineInputBorder(),
           prefixIcon: Icon(Icons.search)
         ),

@@ -2,6 +2,8 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:t4_demo_flutter/widgets/filters_bottom_sheet.dart';
 import 'package:t4_demo_flutter/widgets/grocery_browser.dart';
 import 'package:t4_demo_flutter/widgets/landing/multi_tab.dart';
 import 'package:t4_demo_flutter/widgets/landing/persisted_grocery_list.dart';

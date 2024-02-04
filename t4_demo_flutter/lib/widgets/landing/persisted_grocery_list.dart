@@ -6,7 +6,7 @@ import 'package:t4_demo_flutter/widgets/components/ingredient_card.dart';
 import 'package:t4_demo_flutter/widgets/grocery_item.dart';
 
 import '../../constants/strings.dart';
-import '../../constants/text_styles.dart';
+import '../../constants/styles.dart';
 import '../../dto_s/ingredients.dart';
 import '../../providers/saved_data_provider.dart';
 
@@ -21,20 +21,8 @@ class PersistedGroceryListState extends ConsumerState<PersistedGroceryList> {
   Widget build(BuildContext context) {
     return  Column(
       children: [
-        getSubheading(),
         getPersistedGroceries()
       ]
-    );
-  }
-
-  getSubheading() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      child: const Text(
-        Strings.persistedGroceryTitle,
-        style: TextStyles.subheadingStyle,
-      ),
-
     );
   }
 
@@ -52,7 +40,7 @@ class PersistedGroceryListState extends ConsumerState<PersistedGroceryList> {
             return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return IngredientCard(snapshot.data![index]);
+                  return IngredientCard(snapshot.data![index], true);
                 }
             );
           }

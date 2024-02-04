@@ -32,10 +32,10 @@ class RecipeCardState extends State<RecipeCard> {
     return Card(
       child: Column(
         children: [
-          getTitle(),
-          getSubheading(),
-          getRecipeImage(),
-          SizedBox(height: 15,),
+          recipe.recipeName != null ? getTitle():Container(),
+          recipe.sourceUrl != null ? getSubheading(): Container(),
+          recipe.imageUrl != null ? getRecipeImage():Container(),
+          const SizedBox(height: 15,),
           getIngredientsList(),
         ],
       ),
@@ -45,7 +45,13 @@ class RecipeCardState extends State<RecipeCard> {
   getTitle() {
     return Row(
       children: [
-        Expanded(child: Text(recipe.recipeName)),
+        Expanded(child: Text(
+          recipe.recipeName!,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold
+          ),
+        )),
         getSaveRecipe(),
     ],);
   }
@@ -66,7 +72,7 @@ class RecipeCardState extends State<RecipeCard> {
   getSubheading() {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => WebView(recipe.sourceUrl)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => WebView(recipe.sourceUrl!)));
       },
       child: const Text(
         "Visit Source",
@@ -83,7 +89,7 @@ class RecipeCardState extends State<RecipeCard> {
         width: 300,
         child:
           Image.network(
-            recipe.imageUrl
+            recipe.imageUrl!
         ));
   }
 
@@ -115,7 +121,7 @@ class RecipeCardState extends State<RecipeCard> {
               child: Column(
                 children: [
                   Text(
-                    ingredient.name,
+                    ingredient.name!,
                     maxLines: 3,
                   ),
                   Row(

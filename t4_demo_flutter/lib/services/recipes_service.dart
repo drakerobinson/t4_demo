@@ -13,7 +13,7 @@ class RecipesService {
 
   Future<List<Recipe>> getRandomRecipes() async {
     var response = await http.get(
-      Uri.parse('https://api.spoonacular.com/recipes/random?${Strings.apiKey}'),
+      Uri.parse('https://api.spoonacular.com/recipes/random?${Strings.apiKey}&number=5'),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -84,8 +84,58 @@ class RecipesService {
     return recipes;
   }
 
-  //Future<List<Recipe>> queryRecipes(String query) async {
+  Future<List<Recipe>> searchRecipes(String query) async {
+    List<Recipe> recipes = [];
 
-  //}
+    final response = await http.get(
+        Uri.parse('https://api.spoonacular.com/recipes/complexSearch?query=$query&${Strings
+            .apiKey}&number=4'),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    );
+    try {
+      final responseData = jsonDecode(response.body);
+
+
+      responseData['results'].forEach((element) async {
+        await getRecipeById(element['id']).then((value) => recipes.add(value));
+      });
+
+      return recipes;
+    } catch (error) {
+      print(error);
+      return <Recipe>[];
+    }
+  }
+
+  Future<Recipe> getRecipeById(int id) async {
+
+    final response = await http.get(
+        Uri.parse('https://api.spoonacular.com/recipes/$id/information?&${Strings
+            .apiKey}'),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    );
+    print(response);
+    final responseData = jsonDecode(response.body);
+    return Recipe.fromJSON(responseData);
+  }
+
+  Future<List<Recipe>> getRecipesWithIngredient(int id) async {
+    List<Recipe> recipes = await getSavedRecipes();
+    List<Recipe> likeRecipes = [];
+    recipes.forEach((element) { 
+      element.ingredients.forEach((ingredientsIterated) {
+        if(ingredientsIterated.id == id && !likeRecipes.contains(element)) {
+          likeRecipes.add(element);
+        }
+      });
+    });
+    return likeRecipes;
+  }
+
+
 
 }

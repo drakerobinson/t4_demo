@@ -2,13 +2,13 @@ import 'package:t4_demo_flutter/dto_s/ingredients.dart';
 
 class Recipe {
 
-  final String imageUrl;
-  final String sourceUrl;
-  final String recipeName;
+  final String? imageUrl;
+  final String? sourceUrl;
+  final String? recipeName;
   final List<Ingredient> ingredients;
 
   Recipe({
-    required this.imageUrl,
+    this.imageUrl,
     required this.sourceUrl,
     required this.recipeName,
     required this.ingredients,
@@ -33,9 +33,12 @@ class Recipe {
 }
 
 parseIngredientsList(Map<String, dynamic> json) {
-  List<Ingredient> ingredientsList = [];
-  json['extendedIngredients'].forEach((element) {
-    ingredientsList.add(Ingredient.fromExpandedJSON(element));
-  });
-  return ingredientsList;
+  if(json['extendedIngredients'] != null) {
+    List<Ingredient> ingredientsList = [];
+    json['extendedIngredients'].forEach((element) {
+      ingredientsList.add(Ingredient.fromExpandedJSON(element));
+    });
+    return ingredientsList;
+  }
+  return [];
 }

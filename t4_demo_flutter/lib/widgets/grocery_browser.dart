@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:t4_demo_flutter/constants/styles.dart';
 import 'package:t4_demo_flutter/providers/search_providers.dart';
 import 'package:t4_demo_flutter/widgets/components/ingredient_card.dart';
 import 'package:t4_demo_flutter/widgets/search/search_box.dart';
 
+import '../constants/strings.dart';
 import '../dto_s/ingredients.dart';
 
 class GroceryBrowser extends ConsumerStatefulWidget {
@@ -18,15 +20,16 @@ class GroceryBrowserState extends ConsumerState<GroceryBrowser> {
     // TODO: implement build
    return Column(
      children: [
-       CustomSearchBar(),
-       getResultsStream(),
+       CustomSearchBar(Strings.ingredientsHint),
+       Styles.t4Divider,
+       getResults(),
      ],
    );
   }
 
 
-  getResultsStream() {
-    final searchWatcher = ref.watch(searchResultsProvider);
+  getResults() {
+    final searchWatcher = ref.watch(ingredientResultsProvider);
     final queryWatcher = ref.watch(queryProvider);
     return searchWatcher.when(
         data: (data) => getIngredientsBuilder(data),
@@ -38,7 +41,7 @@ class GroceryBrowserState extends ConsumerState<GroceryBrowser> {
   getIngredientsBuilder(List<Ingredient> ingredients) {
     return Flexible(child: ListView.builder(
       itemCount: ingredients.length,
-        itemBuilder: (context, index) => IngredientCard(ingredients[index]),
+        itemBuilder: (context, index) => IngredientCard(ingredients[index], false),
     ));
   }
 
