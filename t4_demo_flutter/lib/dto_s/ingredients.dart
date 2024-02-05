@@ -37,4 +37,14 @@ class Ingredient {
     "unit": metric,
   };
 
+  @override
+  bool operator == (Object other) =>
+    identical(this, other) ||
+        other is Ingredient &&
+            runtimeType == other.runtimeType &&
+            id == other.id
+    && name == other.name &&
+    quantity == other.quantity &&
+    metric == other.metric;
+
 }

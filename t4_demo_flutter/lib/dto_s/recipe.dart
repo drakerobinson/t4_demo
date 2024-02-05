@@ -30,6 +30,16 @@ class Recipe {
     'ingredients': ingredients,
   };
 
+
+  @override
+  bool operator == (Object other) =>
+      identical(this, other) ||
+          other is Recipe &&
+              runtimeType == other.runtimeType &&
+              imageUrl == other.imageUrl
+              && sourceUrl == other.sourceUrl &&
+              recipeName == other.recipeName;
+
 }
 
 parseIngredientsList(Map<String, dynamic> json) {

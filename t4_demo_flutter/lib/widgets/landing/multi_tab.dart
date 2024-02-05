@@ -17,14 +17,16 @@ class MultiTabState extends State<MultiTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-      Center(child: getTabButtons()),
-       Flexible(child: isSavedGroceries ? PersistedGroceryList(): PersistedRecipes()),
-    ],));
+    return Directionality(
+        textDirection: TextDirection.ltr,
+        child: Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+          Center(child: getTabButtons()),
+           Flexible(child: isSavedGroceries ? PersistedGroceryList(): PersistedRecipes()),
+    ],)));
   }
 
   getTabButtons() {
